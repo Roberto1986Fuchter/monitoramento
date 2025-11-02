@@ -1,0 +1,47 @@
+/* Estilo do Dropdown */
+.Select-control {
+    background-color: #444 !important; /* Cor de fundo do dropdown */
+    color: white !important; /* Cor do texto */
+    border: 1px solid #666 !important; /* Borda */
+}
+
+/* Estilo do menu suspenso */
+.Select-menu-outer {
+    background-color: #444 !important; /* Cor de fundo do menu */
+    color: white !important; /* Cor do texto no menu */
+    border: 1px solid #666 !important; /* Borda do menu */
+}
+
+/* Estilo dos itens do menu */
+.Select-option {
+    background-color: #444 !important; /* Cor de fundo dos itens */
+    color: white !important; /* Cor do texto dos itens */
+    padding: 10px !important; /* Espaçamento interno */
+}
+
+/* Estilo do item selecionado */
+.Select-option.is-selected {
+    background-color: #666 !important; /* Cor de fundo do item selecionado */
+    color: yellow !important; /* Cor do texto do item selecionado (amarelo) */
+}
+
+/* Estilo do item selecionado e em foco */
+.Select-option.is-selected.is-focused {
+    background-color: #666 !important; /* Cor de fundo do item selecionado */
+    color: yellow !important; /* Cor do texto do item selecionado (amarelo) */
+}
+
+/* Estilo do texto do placeholder */
+.Select-placeholder {
+    color: white !important; /* Cor do texto do placeholder */
+}
+
+/* Estilo do texto digitado no campo de busca */
+.Select-input input {
+    color: white !important; /* Cor do texto digitado */
+}
+
+/* Estilo do texto selecionado no dropdown */
+.Select-value-label {
+    color: yellow !important; /* Cor do texto selecionado (amarelo) */
+}
