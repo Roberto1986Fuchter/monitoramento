@@ -123,13 +123,13 @@ html.Div([
             dcc.Graph(id="graph-temp", style={"height": "220px", "width": "78%"}),
 
             html.Div([
-                html.Div("MÁX.", style={"backgroundColor": "#FF4500", "padding": "8px",
+                html.Div("MÁXIMO.", style={"backgroundColor": "#FF4500", "padding": "8px",
                                          "borderRadius": "5px", "color": "white", "textAlign": "center",
                                          "fontSize": "13px", "marginBottom": "4px"}),
                 html.Div(id="max-temp", style={"backgroundColor": "#555", "padding": "12px",
                                                "borderRadius": "5px", "color": "white", "textAlign": "center",
                                                "fontSize": "22px", "fontWeight": "bold", "marginBottom": "8px"}),
-                html.Div("MÍN.", style={"backgroundColor": "#87CEEB", "padding": "8px",
+                html.Div("MÍNIMO.", style={"backgroundColor": "#87CEEB", "padding": "8px",
                                          "borderRadius": "5px", "color": "white", "textAlign": "center",
                                          "fontSize": "13px", "marginBottom": "4px"}),
                 html.Div(id="min-temp", style={"backgroundColor": "#555", "padding": "12px",
@@ -143,13 +143,13 @@ html.Div([
             dcc.Graph(id="graph-umid", style={"height": "220px", "width": "78%"}),
 
             html.Div([
-                html.Div("MÁX.", style={"backgroundColor": "#FF4500", "padding": "8px",
+                html.Div("MÁXIMO.", style={"backgroundColor": "#FF4500", "padding": "8px",
                                          "borderRadius": "5px", "color": "white", "textAlign": "center",
                                          "fontSize": "13px", "marginBottom": "4px"}),
                 html.Div(id="max-umid", style={"backgroundColor": "#555", "padding": "12px",
                                                "borderRadius": "5px", "color": "white", "textAlign": "center",
                                                "fontSize": "22px", "fontWeight": "bold", "marginBottom": "8px"}),
-                html.Div("MÍN.", style={"backgroundColor": "#87CEEB", "padding": "8px",
+                html.Div("MÍNIMO.", style={"backgroundColor": "#87CEEB", "padding": "8px",
                                          "borderRadius": "5px", "color": "white", "textAlign": "center",
                                          "fontSize": "13px", "marginBottom": "4px"}),
                 html.Div(id="min-umid", style={"backgroundColor": "#555", "padding": "12px",
@@ -322,4 +322,5 @@ server = app.server
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8050, debug=False)
+
 
