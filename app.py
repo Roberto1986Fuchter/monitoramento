@@ -318,5 +318,8 @@ def update_graphs(stored_data, time_range):
     return fig_temp, fig_umid, max_temp_text, min_temp_text, max_umid_text, min_umid_text, table_data
 
 
+server = app.server
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=8050, debug=False)
+
