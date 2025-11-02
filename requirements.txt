@@ -1,6 +1,7 @@
 dash==2.14.1
-pandas==1.5.3
+pandas==2.0.3; python_version < '3.12'
+pandas==1.5.3; python_version >= '3.12'
 plotly==5.15.0
 requests==2.31.0
 gunicorn==20.1.0
-
+numpy==1.24.3
