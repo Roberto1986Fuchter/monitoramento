@@ -93,13 +93,13 @@ html.Div([
         "height": "35px",
         "marginRight": "10px"
     }),
-    html.H1("Monitoramento Temperatura e Umidade", style={
+    html.H1("Temperatura e Umidade (Armazenagem Compostos)", style={
         "textAlign": "center",
         "color": "#FFFFFF",
         "fontFamily": "Arial",
         "margin": "0",
         "flexGrow": "1",
-        "fontSize": "18px",  # Reduzido para mobile
+        "fontSize": "15px",  # Reduzido para mobile
         "lineHeight": "1.2"
     }),
     html.Img(src="/assets/4remove.png", style={
@@ -363,3 +363,4 @@ server = app.server
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8050, debug=False)
+
