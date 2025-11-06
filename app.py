@@ -8,29 +8,6 @@ from datetime import datetime, timedelta
 # Configuração do app Dash
 app = dash.Dash(__name__)
 
-# Meta tags para mobile
-app.index_string = '''
-<!DOCTYPE html>
-<html lang="pt-br" translate="no">
-<head>
-    {%metas%}
-    <title>{%title%}</title>
-    {%favicon%}
-    {%css%}
-    <meta name="google" content="notranslate">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    {%app_entry%}
-    <footer>
-        {%config%}
-        {%scripts%}
-        {%renderer%}
-    </footer>
-</body>
-</html>
-'''
-
 # Função para buscar TODOS os registros via API (sem filtro)
 def get_all_data():
     try:
@@ -87,163 +64,145 @@ def filter_data_by_time_range(df, time_range):
 app.layout = html.Div([
     # Cabeçalho
     # Cabeçalho fixo (sticky)
-# Cabeçalho responsivo
 html.Div([
     html.Img(src="/assets/indubor.jpg", style={
-        "height": "35px",
-        "marginRight": "10px"
+        "height": "45px",
+        "marginRight": "20px"
     }),
-    html.H1("Temperatura e Umidade (Armazenagem Compostos)", style={
+    html.H1("Monitoramento de Temperatura e Umidade", style={
         "textAlign": "center",
         "color": "#FFFFFF",
         "fontFamily": "Arial",
         "margin": "0",
         "flexGrow": "1",
-        "fontSize": "18px",  # Reduzido para mobile
-        "lineHeight": "1.2"
+        "fontSize": "26px"
     }),
     html.Img(src="/assets/4remove.png", style={
-        "height": "40px",
-        "marginLeft": "10px"
+        "height": "55px",
+        "marginLeft": "20px"
     }),
 ], style={
     "display": "flex",
     "alignItems": "center",
     "justifyContent": "space-between",
     "width": "100%",
-    "padding": "8px 5px",  # Padding reduzido
+    "padding": "8px 10px",
     "marginBottom": "10px",
     "backgroundColor": "#2C2C2C",
     "position": "sticky",
     "top": "0",
     "zIndex": "1000",
+    
 }),
 
 
     # Dropdown
-    # Dropdown mobile
-html.Div([
-    dcc.Dropdown(
-        id="time-range-dropdown",
-        options=[
-            {"label": "1 hora", "value": "1h"},
-            {"label": "24 horas", "value": "24h"},
-            {"label": "7 dias", "value": "7d"},
-            {"label": "30 dias", "value": "30d"},
-            {"label": "365 dias", "value": "365d"}
-        ],
-        value="24h",
-        clearable=False,
-        style={
-            "width": "100%",  # Largura total no mobile
-            "maxWidth": "300px",
-            "fontFamily": "calibri",
-            "fontSize": "14px"
-        }
-    )
-], style={"display": "flex", "justifyContent": "center", "marginBottom": "15px", "padding": "0 10px"}),
+    html.Div([
+        dcc.Dropdown(
+            id="time-range-dropdown",
+            options=[
+                {"label": "Última 1 hora", "value": "1h"},
+                {"label": "Últimas 24 horas", "value": "24h"},
+                {"label": "Últimos 7 dias", "value": "7d"},
+                {"label": "Últimos 30 dias", "value": "30d"},
+                {"label": "Últimos 365 dias", "value": "365d"}
+            ],
+            value="24h",
+            clearable=False,
+            style={
+                "width": "200px",
+                "fontFamily": "calibri",
+            }
+        )
+    ], style={"display": "flex", "justifyContent": "center", "marginBottom": "10px"}),
 
     # Gráficos
-    # Gráficos - Layout Responsivo
-html.Div([
-    # Temperatura - Mobile Friendly
     html.Div([
-        # Gráfico em linha única no mobile
-        dcc.Graph(id="graph-temp", style={"height": "250px", "width": "100%"}),
-        
-        # Indicadores abaixo do gráfico no mobile
+        # Temperatura
         html.Div([
+            dcc.Graph(id="graph-temp", style={"height": "220px", "width": "78%"}),
+
             html.Div([
-                html.Div("MÁXIMO", style={"backgroundColor": "#FF4500", "padding": "8px",
+                html.Div("MÁXIMO.", style={"backgroundColor": "#FF4500", "padding": "8px",
                                          "borderRadius": "5px", "color": "white", "textAlign": "center",
-                                         "fontSize": "14px", "marginBottom": "4px"}),
+                                         "fontSize": "13px", "marginBottom": "4px"}),
                 html.Div(id="max-temp", style={"backgroundColor": "#555", "padding": "12px",
                                                "borderRadius": "5px", "color": "white", "textAlign": "center",
-                                               "fontSize": "20px", "fontWeight": "bold", "marginBottom": "8px"})
-            ], style={"flex": "1", "margin": "5px"}),
-            
-            html.Div([
-                html.Div("MÍNIMO", style={"backgroundColor": "#87CEEB", "padding": "8px",
+                                               "fontSize": "22px", "fontWeight": "bold", "marginBottom": "8px"}),
+                html.Div("MÍNIMO.", style={"backgroundColor": "#87CEEB", "padding": "8px",
                                          "borderRadius": "5px", "color": "white", "textAlign": "center",
-                                         "fontSize": "14px", "marginBottom": "4px"}),
+                                         "fontSize": "13px", "marginBottom": "4px"}),
                 html.Div(id="min-temp", style={"backgroundColor": "#555", "padding": "12px",
                                                "borderRadius": "5px", "color": "white", "textAlign": "center",
-                                               "fontSize": "20px", "fontWeight": "bold"})
-            ], style={"flex": "1", "margin": "5px"})
-        ], style={"display": "flex", "justifyContent": "space-between", "width": "100%", "marginTop": "10px"})
-    ], style={"marginBottom": "25px", "width": "100%"}),
+                                               "fontSize": "22px", "fontWeight": "bold"})
+            ], style={"marginLeft": "20px", "width": "130px"})
+        ], style={"display": "flex", "alignItems": "center", "marginBottom": "20px", "justifyContent": "center"}),
 
-    # Umidade - Mesma estrutura
-    html.Div([
-        dcc.Graph(id="graph-umid", style={"height": "250px", "width": "100%"}),
-        
+        # Umidade
         html.Div([
+            dcc.Graph(id="graph-umid", style={"height": "220px", "width": "78%"}),
+
             html.Div([
-                html.Div("MÁXIMO", style={"backgroundColor": "#FF4500", "padding": "8px",
+                html.Div("MÁXIMO.", style={"backgroundColor": "#FF4500", "padding": "8px",
                                          "borderRadius": "5px", "color": "white", "textAlign": "center",
-                                         "fontSize": "14px", "marginBottom": "4px"}),
+                                         "fontSize": "13px", "marginBottom": "4px"}),
                 html.Div(id="max-umid", style={"backgroundColor": "#555", "padding": "12px",
                                                "borderRadius": "5px", "color": "white", "textAlign": "center",
-                                               "fontSize": "20px", "fontWeight": "bold", "marginBottom": "8px"})
-            ], style={"flex": "1", "margin": "5px"}),
-            
-            html.Div([
-                html.Div("MÍNIMO", style={"backgroundColor": "#87CEEB", "padding": "8px",
+                                               "fontSize": "22px", "fontWeight": "bold", "marginBottom": "8px"}),
+                html.Div("MÍNIMO.", style={"backgroundColor": "#87CEEB", "padding": "8px",
                                          "borderRadius": "5px", "color": "white", "textAlign": "center",
-                                         "fontSize": "14px", "marginBottom": "4px"}),
+                                         "fontSize": "13px", "marginBottom": "4px"}),
                 html.Div(id="min-umid", style={"backgroundColor": "#555", "padding": "12px",
                                                "borderRadius": "5px", "color": "white", "textAlign": "center",
-                                               "fontSize": "20px", "fontWeight": "bold"})
-            ], style={"flex": "1", "margin": "5px"})
-        ], style={"display": "flex", "justifyContent": "space-between", "width": "100%", "marginTop": "10px"})
-    ], style={"marginBottom": "20px", "width": "100%"})
-], style={"padding": "10px"}),
+                                               "fontSize": "22px", "fontWeight": "bold"})
+            ], style={"marginLeft": "20px", "width": "130px"})
+        ], style={"display": "flex", "alignItems": "center", "marginBottom": "15px", "justifyContent": "center"})
+    ]),
 
     # 🔹 Tabela mais próxima dos gráficos
-    # Tabela mobile
-html.Div([
-    html.H3("Últimos 20 Registros", style={
-        "color": "white",
-        "textAlign": "center",
-        "marginTop": "5px",
-        "marginBottom": "8px",
-        "fontFamily": "Arial",
-        "fontSize": "18px"  # Reduzido
-    }),
-    dash_table.DataTable(
-        id='table-latest-data',
-        columns=[
-            {"name": "Data/Hora", "id": "data_hora"},
-            {"name": "Temp (°C)", "id": "temperatura"},  # Nome mais curto
-            {"name": "Umid (%)", "id": "umidade"}        # Nome mais curto
-        ],
-        style_table={
-            "width": "100%",  # Largura total
-            "margin": "auto",
-            "overflowX": "auto",
-            "border": "1px solid #555"
-        },
-        style_header={
-            "backgroundColor": "#333",
-            "color": "white",
-            "fontWeight": "bold",
-            "textAlign": "center",
-            "fontSize": "12px",  # Reduzido
-            "border": "1px solid #555"
-        },
-        style_cell={
-            "backgroundColor": "#2C2C2C",
+    html.Div([
+        html.H3("Últimos 20 Registros", style={
             "color": "white",
             "textAlign": "center",
-            "padding": "4px",   # Padding reduzido
-            "fontFamily": "calibri",
-            "fontSize": "11px", # Reduzido
-            "border": "1px solid #555",
-            "minWidth": "80px"  # Largura mínima
-        },
-        page_size=20
-    )
-], style={"padding": "0 10px"}),
+            "marginTop": "5px",
+            "marginBottom": "8px",
+            "fontFamily": "Arial",
+            "fontSize": "20px"
+        }),
+        dash_table.DataTable(
+            id='table-latest-data',
+            columns=[
+                {"name": "Data/Hora", "id": "data_hora"},
+                {"name": "Temperatura (°C)", "id": "temperatura"},
+                {"name": "Umidade (%)", "id": "umidade"}
+            ],
+            style_table={
+                "width": "90%",
+                "margin": "auto",
+                "overflowX": "auto",
+                "border": "1px solid #555"  # Borda externa
+            },
+            style_header={
+                "backgroundColor": "#333",
+                "color": "white",
+                "fontWeight": "bold",
+                "textAlign": "center",
+                "fontSize": "14px",
+                "border": "1px solid #555"
+            },
+            style_cell={
+                "backgroundColor": "#2C2C2C",
+                "color": "white",
+                "textAlign": "center",
+                "padding": "6px",
+                "fontFamily": "calibri",
+                "fontSize": "13px",
+                "border": "1px solid #555"  # 🔹 garante linhas visíveis em todas as direções
+            },
+            page_size=20
+        )
+
+    ]),
 
     dcc.Interval(id="interval-component", interval=30000, n_intervals=0),
     dcc.Store(id='stored-data')
@@ -363,5 +322,3 @@ server = app.server
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8050, debug=False)
-
-
